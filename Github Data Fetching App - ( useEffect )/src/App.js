@@ -1,12 +1,9 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
-
-
 let userInput = window.prompt("Enter Username: ");
 const GithubUser = ({ username }) => {
   const [data, setData] = useState(null);
-
 
   //! We can also use the useEffect hook in order to fetch some data
   useEffect(() => {
@@ -24,11 +21,24 @@ const GithubUser = ({ username }) => {
         <h1>Name: {data.login}</h1>
         <p>{data.bio}</p>
         <h2>
-          Twitter Username:{" "}
-          {data.twitter_username ? data.twitter_username : "NA"}
+          Twitter Username:&nbsp;
+          <a
+            href={
+              data.twitter_username
+                ? "https://www.twitter.com/" + data.twitter_username
+                : "#"
+            }
+          >
+            {data.twitter_username ? data.twitter_username : "NA"}
+          </a>
         </h2>
         <h1>Followers: {data.followers}</h1>
         <h1>Following: {data.following}</h1>
+        <a href={data.login ? "https://www.github.com/" + data.login : "#"}>
+          <button>
+            <h1> Open Github </h1>
+          </button>
+        </a>
       </>
     );
   } else return null;
